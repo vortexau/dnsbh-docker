@@ -1,0 +1,3 @@
+[submodule "dnsbh"]
+	path = dnsbh
+	url = https://github.com/vortexau/dnsbh
