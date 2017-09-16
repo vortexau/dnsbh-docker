@@ -20,6 +20,10 @@ RUN echo "* 4 * * * /usr/sbin/rndc reconfig" >> /etc/crontab
 
 # Add our Bind config
 COPY dnsbh/named.conf.options /etc/bind/named.conf.options
+# Add the blacklists
+COPY dnsbh/blockeddns.hosts /etc/bind/blockeddns.hosts
+
+RUN echo "include \"/etc/bind/blockeddns.zones\";" >> /etc/bind/named.conf
 
 EXPOSE 53/udp 53/tcp
 ENTRYPOINT ["/usr/sbin/run.sh"]
