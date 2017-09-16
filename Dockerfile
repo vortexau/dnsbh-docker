@@ -3,7 +3,7 @@ MAINTAINER james.mclean@gmail.com
 
 RUN apt-get update \
     && apt-get -y upgrade \
-    && DEBIAN_FRONTEND=noninteractive apt-get -y install bind9 wget python2.7 \
+    && DEBIAN_FRONTEND=noninteractive apt-get -y install dnsutils bind9 wget python2.7 \
     && rm -rf /var/lib/apt/lists/*
 
 # Install the run script
@@ -14,8 +14,11 @@ RUN chmod 755 /usr/sbin/run.sh
 COPY dnsbh/dnsbh.py /usr/bin/dnsbh.py
 RUN chmod 755 /usr/bin/dnsbh.py
 
+# Add our Bind config
+COPY dnsbh/named.conf.options /etc/bind/named.conf.options
+
 # Run the script to download the blacklists
-CMD ["/usr/bin/dnsbh.py"]
+#CMD ["/usr/bin/dnsbh.py"]
 
 # Install the cronjob
 
