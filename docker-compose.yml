@@ -1,0 +1,5 @@
+dnsbh:
+    build: .
+    ports:
+        - "53:53"
+        - "53:53/udp"
